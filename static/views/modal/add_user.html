@@ -1,0 +1,82 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{ addUserController.modalTitle }}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="addUserController.cancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal ">
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="txtFirstName">First Name</label>
+            <div class="col-md-9">
+                <input type="text" ng-model="addUserController.user.firstname" focus-me="true"
+                       name="txtFirstName" id="txtFirstName" class="form-control" focus="txtLastName"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="txtLastName">Last Name</label>
+            <div class="col-md-9">
+                <input type="text" ng-model="addUserController.user.lastname"
+                       name="txtLastName" id="txtLastName" class="form-control" focus="txtUserName"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="txtUserName">User Name</label>
+            <div class="col-md-9">
+                <input type="text" ng-model="addUserController.user.username" id="txtUserName"
+                       name="txtUserName" class="form-control" focus="txtPassword"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="txtPassword">Password</label>
+            <div class="col-md-9">
+                <input type="password" ng-model="addUserController.user.password" id="txtPassword"
+                       class="form-control" focus="txtEmail"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="txtEmail">email</label>
+
+            <div class="col-md-9">
+                <input type="text" ng-model="addUserController.user.email" id="txtEmail"
+                       class="form-control" focus="txtPhone"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="txtPhone">Phone</label>
+
+            <div class="col-md-9">
+                <input type="text" ng-model="addUserController.user.phone" id="txtPhone"
+                       class="form-control" focus="txtOrganisation"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="txtOrganisation">Organisation</label>
+
+            <div class="col-md-9">
+                <input type="text" ng-model="addUserController.user.organisation" id="txtOrganisation"
+                       class="form-control" focus="optRole"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">Role</label>
+
+            <div class="col-md-9">
+                <select class="form-control" ng-model="addUserController.user.roles"
+                        ng-options="roles.name for roles in addUserController.roles" name="optRole">
+                        <option value="">Choose Role</option>
+                </select>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<div class="modal-footer">
+    <button type="button" name="btnSubmit" class="btn btn-primary" ng-click="addUserController.submit()">Save changes</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="addUserController.cancel()">Close</button>
+</div>

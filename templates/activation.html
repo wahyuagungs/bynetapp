@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <title>Bayesian Network Parameteriser | Activation Form</title>
+    <meta name="login" content="true">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Activation Page" name="description" />
+    <meta content="@wahyuagungs" name="author" />
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+
+    <link rel="stylesheet" href="/static/vendors/css/animate.min.css">
+    <link rel="stylesheet" href="/static/vendors/css/fonts-roboto.css">
+    <link rel="stylesheet" href="/static/vendors/css/login.css">
+
+</head>
+<body class="login">
+<div class="form animated flipInX">
+  <h2>Activation Form</h2>
+    <form class="activation-form" action="/activate" method="post">
+         {% with messages = get_flashed_messages() %}
+             {% if messages %}
+             <div class="alert alert-danger">
+                <span>{{ messages[0] }}</span>
+            </div>
+             {% endif %}
+          {% endwith %}
+        <p class="alert alert-danger" id="error" style="display: none"></p>
+        <input type="text" value="{{ result.username | safe }}" readonly="readonly" id="username" name="username">
+        <input type="hidden" value="" id="token" name="token">
+        <input placeholder="Password" type="password" id="password1" name="password1">
+        <input placeholder="Confirm Password" type="password" id="password2" name="password2">
+
+        <label for="consent"> <input type="checkbox" value="true" id="consent" name="consent">I agree to participate in the research study.
+            I understand the purpose and nature of this study and I am participating voluntarily.
+            I understand that I can withdraw from the study at any time,
+            without any penalty or consequences.</label>
+
+        <button type="submit" >Activate</button>
+        <a class='forgot' href='/'>Back to Login</a>
+    </form>
+</div>
+<script src="/static/vendors/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/vendors/js/jquery.validate.min.js"></script>
+
+<script src="/static/js/login.js" type="text/javascript"></script>
+</body></html>

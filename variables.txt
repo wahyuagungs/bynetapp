@@ -1,0 +1,5 @@
+var,Brand:Apple;LG;Lenovo
+var,Type:Light;Professional
+var,Age:Old;New
+var,Price:Cheap;Medium;Expensive
+rel:Brand,Price;Type,Price;Age,Price;Brand;Type;Age

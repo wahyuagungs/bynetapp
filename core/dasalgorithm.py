@@ -1,0 +1,4 @@
+
+class DasAlgorithm():
+    pass
+

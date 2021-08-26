@@ -1,0 +1,27 @@
+<script type="text/ng-template" id="printMenu">
+
+    <a ng-if="menuItem.childItems==undefined" class="nav-link" ui-sref-active="active" ui-sref="{{ menuItem.link }}">
+         <i class="{{ menuItem.class_picture }}"></i> {{menuItem.title}}</a>
+
+    <a  ng-if="menuItem.childItems!=undefined"  class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('{{menuItem.link}}')}">
+         <i class="{{ menuItem.class_picture }}"></i> {{menuItem.title}}</a>
+     <ul class="nav-dropdown-items" ng-if="menuItem.childItems.length>0">
+         <li class="nav-item" ng-repeat="menuItem in menuItem.childItems" ng-include="'printMenu'" >
+          </li>
+     </ul>
+</script>
+
+<div class="sidebar" ng-controller="sidebarController">
+  <nav class="sidebar-nav">
+    <ul class="nav">
+      <li class="divider"></li>
+      <li class="nav-title">
+        Menu
+      </li>
+        <li class="nav-item nav-dropdown" ng-repeat="menuItem in menuItems" ng-include="'printMenu'">
+        </li>
+
+      <li class="divider"></li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,134 @@
+<div class="animated fadeIn">
+    <div class="row" ng-if="dashboardController.profile.role == 3">
+         <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Dashboard
+                    <div class="card-header-actions">
+                        <a class="card-header-action">
+                            <small class="text-muted">Information</small>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4>You have {{ dashboardController.projects.length }} task</h4>
+
+                    <table ng-table="tableProjects" class="ui table compact inverted segment" show-filter="true"
+                           header-class="text-left">
+                        <tr ng-repeat="project in dashboardController.projects">
+                            <td data-title="'No'">{{ no+$index}}</td>
+                            <td data-title="'Title'">{{ project.title }}</td>
+                            <td data-title="'Description'">{{ project.description }}</td>
+                            <td data-title="'Options'">
+                                <span>
+                                    <button ng-click="view(project)" type="submit"
+                                            class="btn btn-gray-400" >
+                                        <i class="fa fa-search"></i></button>
+                                </span>
+                                <span>
+                                     <button type="submit" ui-sref="app.tasks.process"
+                                            class="btn btn-primary">
+                                        <i class="fa fa-play"></i> Start</button>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-question-circle"></i> Information
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron-light">
+                        <p>Thank you for your participation in this research project.</p>
+                        <p>You can change your password by clicking a user icon on top-right
+                                corner or simply click <a ui-sref-active="active" ui-sref="app.profile">here</a>.
+                        </p>
+                        <p>
+                            You can start or resume all tasks by click here <a ui-sref-active="active" ui-sref="app.tasks.process">here</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div >
+    <div class="row" ng-if="dashboardController.profile.role != 3">
+        <div class="col-sm-12 col-xl-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> About us
+                    <div class="card-header-actions">
+                        <a class="card-header-action">
+                            <small class="text-muted">Information</small>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron">
+                        <h4 class="display-4">Welcome to ByNet <span style="color: #20a8d8;">App</span>!</h4>
+                        <p class="lead">Hello and welcome <div class="clearfix"></div>
+                        {{ dashboardController.profileApp.information }}
+                            </p>
+                        <hr class="my-4">
+                        <p>Project {{ dashboardController.profileApp.title }}</p>
+                        <p><a href="{{ dashboardController.profileApp.url }}">{{ dashboardController.profileApp.organisation }}</a> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-graph"></i> Tasks, Models, and Projects
+                    <div class="card-header-actions">
+                        <small class="text-muted">New tasks or projects you may be involved</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="scrollspy-example1">
+                        <div id="new-tasks" data-spy="scroll" data-target="#navbar-example1" data-offset="65"
+                             style="position: relative; height: 200px; overflow: auto; margin-top: .5rem; overflow-y: scroll;">
+                            <ul class="list-group list-group-flush" ng-repeat="recent in dashboardController.recents">
+                               <li class="list-group-item d-flex justify-content-between align-items-center"><span><i
+                                        class="icon-graph"></i>   {{ recent.label }}</span> <span
+                                        class="badge badge-red badge-pill">New</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-feed"></i> Recent Activities
+                    <div class="card-header-actions">
+                        <small class="text-muted">Your last activities will be displayed here</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="scrollspy-example1">
+                        <div id="recent-activities" data-spy="scroll" data-target="#navbar-example1" data-offset="65"
+                             style="position: relative; height: 200px; overflow: auto; margin-top: .5rem; overflow-y: scroll;">
+                            <ul class="list-group list-group-flush" ng-repeat="log in dashboardController.logs">
+                                <li class="list-group-item d-flex justify-content-between align-items-center"><span><i
+                                        class="icon-login"></i>   {{ log.label }}</span> <span
+                                        class="badge badge-green badge-pill">New</span></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

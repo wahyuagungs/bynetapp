@@ -1,0 +1,68 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-feed"></i> Application Profile Settings
+                </div>
+                <div class="card-body">
+                    <form role="form" action="#">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Title</label>
+                            <div class="col-md-9">
+                                <input type="text" id="txtTitle" ng-model="profileAppController.profileApp.title"
+                                       class="form-control"
+                                       focus="txtUrll"/>
+                                <span class="help-block">This will be used as a brand sign in the dashboard</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">URL</label>
+                            <div class="col-md-9">
+                                <input type="text" id="txtUrll" ng-model="profileAppController.profileApp.url" class="form-control"
+                                       focus="txtOrganisation"/>
+                                <span class="help-block">The URL will be displayed at any occurrences inside App</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Organisation</label>
+                            <div class="col-md-9">
+                                <input type="text" id="txtOrganisation" ng-model="profileAppController.profileApp.organisation"
+                                       class="form-control"
+                                       focus="txtEmail"/>
+                                <span class="help-block">This Organisation will be displayed both in the bottom of the section and contact</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">email</label>
+                            <div class="col-md-9">
+                                <input type="text" ng-model="profileAppController.profileApp.email" id="txtEmail"
+                                       class="form-control"
+                                       focus="txtInformation"/>
+                                <span class="help-block">This email information will be displayed in the contact section</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Information</label>
+                            <div class="col-md-9">
+                            <textarea class="form-control" id="txtInformation"
+                                      ng-model="profileAppController.profileApp.information"
+                                      placeholder="Give Information.."></textarea>
+                                <span class="help-block">The information provided will be given in the dashboard and contact section</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success" ng-click="profileAppController.save()" id="btnSave"
+                            type="submit">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                    <button class="btn btn-secondary" ng-click="profileAppController.reset()" type="submit">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

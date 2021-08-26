@@ -1,0 +1,6 @@
+{
+    db_engine : "postgres://bnuser:Your_Password_here@localhost:5432/bndb",
+    server_host : "localhost",
+    server_ip : "127.0.0.1",
+    server_port : 5000
+}

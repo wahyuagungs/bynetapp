@@ -1,0 +1,94 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-user"></i> My Profile
+                </div>
+                <div class="card-body">
+                    <div class="profile-sidebar-portlet">
+                        <div class="profile-userpic">
+                            <img src="/static/img/avatars/avatar.png" class="img-responsive" alt=""></div>
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">{{ profile.firstname }} {{ profile.lastname }}</div>
+                            <div class="profile-usertitle-job"> {{ profile.organisation }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-suitcase"></i> Profile Account
+                </div>
+
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="home-tab" data-toggle="tab" data-target="#profile" href="javascript;:" role="tab"
+                               aria-controls="home" aria-selected="false">Profile Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="javascript;:" data-target="#password"
+                               role="tab" aria-controls="profile" aria-selected="true">Change Password</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTab1Content">
+                        <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form role="form" action="#">
+                                <div class="form-group">
+                                    <label class="control-label">First Name</label>
+                                    <input type="text" id="txtFirstName" ng-model="user.firstname" class="form-control"
+                                           focus="txtLastName"/></div>
+                                <div class="form-group">
+                                    <label class="control-label">Last Name</label>
+                                    <input type="text" id="txtLastName" ng-model="user.lastname" class="form-control"
+                                           focus="txtUsername"/></div>
+                                <div class="form-group">
+                                    <label class="control-label">Username</label>
+                                    <input type="text" id="txtUsername" ng-model="user.username" class="form-control"
+                                           focus="txtEmail"/></div>
+                                <div class="form-group">
+                                    <label class="control-label">email</label>
+                                    <input type="text" ng-model="user.email" id="txtEmail" class="form-control"
+                                           focus="txtPhone"/></div>
+                                <div class="form-group">
+                                    <label class="control-label">Phone</label>
+                                    <input type="text" ng-model="user.phone" id="txtPhone" class="form-control"
+                                           focus="txtOrganisation"/></div>
+                                <div class="form-group">
+                                    <label class="control-label">Organisation</label>
+                                    <input type="text" ng-model="user.organisation" id="txtOrganisation"
+                                           class="form-control" focus="btnSubmit"/>
+                                </div>
+                                <div class="margiv-top-10">
+                                    <a href="#" class="btn btn-primary" ng-click="updateProfile()"> Save Changes </a>
+                                    <a href="#" class="btn btn-default" ng-click="resetUpdateProfile()"> Cancel </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="password" role="tabpanel"
+                             aria-labelledby="password-tab">
+                            <form action="#">
+                            <div class="form-group">
+                                <label class="control-label">Current Password</label>
+                                <input type="password" class="form-control" ng-model="passwords.old" id="txtOldPassword" focus="txtNewPassword1"/> </div>
+                            <div class="form-group">
+                                <label class="control-label">New Password</label>
+                                <input type="password" class="form-control" ng-model="passwords.new1" id="txtNewPassword1" focus="txtNewPassword2"/> </div>
+                            <div class="form-group">
+                                <label class="control-label">Re-type New Password</label>
+                                <input type="password" class="form-control" ng-model="passwords.new2" id="txtNewPassword2"/> </div>
+                            <div class="margin-top-10">
+                                <a href="#" class="btn btn-primary" ng-click="updatePassword()"> Change Password </a>
+                                <a href="#" class="btn btn-default" ng-click="resetPassword()"> Cancel </a>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

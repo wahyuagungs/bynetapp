@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta name="500" content="true">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="Error Page" name="description"/>
+    <meta content="@wahyuagungs" name="author"/>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <title>HTTP 500 | Error</title>
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="app flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="clearfix">
+                    <h1 class="float-left display-3 mr-4">500</h1>
+                    <h4 class="pt-3">Houston, we have a problem!</h4>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <p class="text-danger">ERROR : {{ messages[0] }} <br/></p>
+                        {% endif %}
+                    {% endwith %}
+                    <p class="text-danger">Return <a href="/">Home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/vendors/js/jquery.min.js"></script>
+<script src="/static/vendors/js/bootstrap.min.js"></script>
+</body>
+</html>

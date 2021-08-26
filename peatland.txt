@@ -1,0 +1,23 @@
+var,Population Density:Low;Moderate;High
+var,Distance of Hotspot from Settlement:Less than 1km;From 1 - 4km;More than 4km
+var,Distance of Hotspot from Nearest Access Route:Less than 1km;From 1 - 4km;More than 4km
+var,Fire Susceptibility:Low;Medium;High
+var,Activity on the land:Less Likely;Most Likely
+var,Economic Activities:Low;Medium;High
+var,Livelihood:Agricultural;Intentional fire escalation;Timber harvesting;Agroforestry;Non-timber forest product
+var,Monthly Cumulative Rainfall Before ENSO:Below 100mm;Above 100mm
+var,Land Condition:Degraded;Non-degraded
+var,Land use and Land cover changes:Agricultural land;Mixed forest;Open area;Settlement;Water body
+var,Peat Decomposition Level:Safric;Hemic;Fibric
+var,Peat Flammability:Low;Medium;High
+var,Fuel Flammability:Low;Moderate;High
+var,Ground Water Level:Deeper 40cm from surface;Shallower 40cm from surface
+var,Peat Moisture Content:Low;Medium;High
+var,ENSO Effect:El Nino;La Nina;Normal
+var,Monthly Cumulative Rainfall:Below 100mm;Above 100mm
+var,Relative Humidity:Low;Moderate;High
+var,Local Wind Speed:Low;High
+var,Degree of Fire Danger Index:Low;Moderate;High
+var,Fire Surface Escalation:Yes;No
+rel:Population Density,Distance of Hotspot from Settlement;Population Density,Distance of Hotspot from Nearest Access Route;Distance of Hotspot from Settlement,Fire Susceptibility;Distance of Hotspot from Nearest Access Route,Fire Susceptibility;Fire Susceptibility,Fire Surface Escalation;Activity on the land,Economic Activities;Livelihood,Economic Activities;Economic Activities,Land use and Land cover changes;Economic Activities,Land Condition;Monthly Cumulative Rainfall Before ENSO,Land Condition;Monthly Cumulative Rainfall Before ENSO,Ground Water Level;Ground Water Level,Peat Moisture Content;Land Condition,Land use and Land cover changes;Land use and Land cover changes,Peat Decomposition Level;Peat Decomposition Level,Peat Flammability;Land use and Land cover changes,Fuel Flammability;Fuel Flammability,Fire Surface Escalation;Peat Moisture Content,Peat Flammability;ENSO Effect,Monthly Cumulative Rainfall;Monthly Cumulative Rainfall,Relative Humidity;Monthly Cumulative Rainfall,Peat Moisture Content;Monthly Cumulative Rainfall,Degree of Fire Danger Index;Relative Humidity,Degree of Fire Danger Index;Local Wind Speed,Degree of Fire Danger Index;Degree of Fire Danger Index,Fire Surface Escalation;Peat Flammability,Fire Surface Escalation;Population Density;Activity on the land;Livelihood;ENSO Effect;Monthly Cumulative Rainfall Before ENSO;Local Wind Speed
+tag:Anthropology;Climatology;Agricultural;Economics;Soil

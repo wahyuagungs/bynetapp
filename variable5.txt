@@ -1,0 +1,9 @@
+var,Laptop Brand:Apple;LG;Lenovo
+var,Laptop Type:Light;Professional
+var,Laptop Age:Old;New
+var,Laptop Price:Cheap;Medium;Expensive
+var,Buying Laptop:Yes;No
+var,Person Salary:Low;Medium;High
+var,Person Occupation:Unemployed;Casual;Professional
+rel:Laptop Brand,Laptop Price;Laptop Type,Laptop Price;Laptop Age,Laptop Price;Laptop Price,Buying Laptop;Person Salary,Buying Laptop;Laptop Brand;Laptop Type;Laptop Age;Person Occupation,Person Salary;Person Occupation
+tag:Electronics;Computer;Finance;Management

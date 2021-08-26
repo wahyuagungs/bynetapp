@@ -1,0 +1,29 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> About us
+                    <div class="card-header-actions">
+                        <a class="card-header-action">
+                            <small class="text-muted">Information</small>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron">
+                        <h4 class="display-4">Welcome to ByNet <span style="color: #20a8d8;">App</span>!</h4>
+                        <p class="lead">Hello and welcome <div class="clearfix"></div>
+                        {{ aboutController.profileApp.information }}
+                            </p>
+                        <hr class="my-4">
+                        <p>Project {{ aboutController.profileApp.title }}</p>
+                        <p><a href="{{ aboutController.profileApp.url }}">{{ aboutController.profileApp.organisation }}</a> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{ modelController.modalTitle }}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modelController.cancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" ng-if="modelController.show">
+    <div d3-dagre>
+    <svg width="100%" height="500" preserveAspectRatio="xMidYMid meet">
+      <g transform="translate(20,20)"></g>
+    </svg>
+    </div>
+</div>

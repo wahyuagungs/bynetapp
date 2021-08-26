@@ -1,0 +1,216 @@
+<div class="animated fadeIn">
+    <div class="row" ng-hide="modelController.show">
+        <!--Repeat starts here-->
+        <div class="col-sm-6 col-md-4" ng-repeat="project in modelController.projects">
+            <div class="card" ng-if="project.is_activated">
+                <div class="card-header">
+                    <i class="fa fa-briefcase"></i>{{ project.title }}
+                    <span class="badge badge-pill badge-success float-right">Active</span>
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>{{ project.start_date | date:'dd MMMM yyyy'}} -
+                            {{ project.end_date | date:'dd MMMM yyyy'}}</strong></small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron">
+                        <p dd-text-collapse dd-text-collapse-max-length="100"
+                           dd-text-collapse-text="{{ project.description }}">
+                        </p>
+                        <hr class="my-4">
+                        <p class="lead">
+                            <a class="btn btn-primary" ng-click="modelController.process(project)" href="#"
+                               role="button"><i class="fa fa-arrow-right"></i> Next</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card bg-dark" ng-if="!project.is_activated">
+                <div class="card-header">
+                    <i class="fa fa-briefcase"></i>{{ project.title }}
+                    <span class="badge badge-pill badge-dark float-right">Inactive</span>
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>{{ project.start_date | date:'dd MMMM yyyy'}} -
+                            {{ project.end_date | date:'dd MMMM yyyy'}}</strong></small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron bg-dark">
+                        <p dd-text-collapse dd-text-collapse-max-length="100"
+                           dd-text-collapse-text="{{ project.description }}">
+                        </p>
+
+                        <hr class="my-4">
+                        <p class="lead">
+                            <a class="btn btn-secondary" href="javascript:;" role="button"><i
+                                    class="fa fa-arrow-right"></i> Next</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Repeat ends here-->
+    </div>
+    <div class="row" ng-hide="!modelController.show">
+        <div class="col-sm-4 col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-briefcase"></i>{{ modelController.project.title }}
+                    <span class="badge badge-pill badge-success float-right">Active</span>
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>{{ modelController.project.start_date | date:'dd MMMM yyyy'}}
+                            - {{ modelController.project.end_date | date:'dd MMMM yyyy'}}</strong></small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron">
+                        <p dd-text-collapse dd-text-collapse-max-length="100"
+                           dd-text-collapse-text="{{ modelController.project.description }}">
+                        </p>
+
+                        <hr class="my-4">
+                        <p class="lead">
+                            <a class="btn btn-green" ng-click="modelController.close()" href="#"
+                               role="button"><i class="fa fa-arrow-left"></i> Back</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Your Models for Project {{ modelController.project.title }}
+                </div>
+
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab1" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active show" id="data-tab" data-toggle="tab" data-target="#data"
+                               href="javascript;:" role="tab"
+                               aria-controls="data" aria-selected="false">Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="load_model-tab" data-toggle="tab" href="javascript;:"
+                               data-target="#load_model"
+                               role="tab" aria-controls="load_model" aria-selected="true">Load Model</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTab1Content">
+                        <div class="tab-pane fade active show" id="data" role="tabpanel"
+                             aria-labelledby="data-tab">
+                            <div class="alert alert-danger" role="alert" ng-if="modelController.models.length == 0">
+                                <strong>You don't have any models associated with this project !</strong>
+                            </div>
+                            <table ng-table="tableModels" class="ui table compact inverted segment" show-filter="true"
+                                   header-class="text-left" ng-hide="modelController.models.length == 0">
+                                <tr ng-repeat="model in modelController.models">
+                                    <td data-title="'No'">{{ no+$index}}</td>
+                                    <td data-title="'Version'">{{ model.version }}</td>
+                                    <td data-title="'Model Status Load'">
+                                        <span class="badge badge-pill badge-info" ng-if="model.has_loaded">Successfully Loaded</span>
+                                        <span class="badge badge-pill badge-danger" ng-if="!model.has_loaded">Awaiting</span>
+                                    </td>
+                                    <td data-title="'Model Status'">
+                                        <span class="badge badge-pill badge-info" ng-if="model.is_active">Active</span>
+                                        <span class="badge badge-pill badge-danger"
+                                              ng-if="!model.is_active">Inactive</span>
+                                    </td>
+                                    <td data-title="'Total Nodes'">{{ model.total_variables }}</td>
+                                    <td data-title="'Action'">
+                                        <span>
+                                            <button ng-click="modelController.constructModel(model)" type="submit"
+                                                    class="btn btn-green" ng-hide="model.has_loaded">
+                                                <i class="fa fa-search"></i> Load</button>
+                                        </span>
+                                        <span>
+                                            <button ng-click="modelController.activate(model)" type="submit"
+                                                    class="btn btn-primary" ng-hide="!model.has_loaded || model.is_active">
+                                                <i class="fa fa-play"></i> Activate</button>
+                                        </span>
+                                        <span>
+                                            <button ng-click="modelController.disable(model)" type="submit"
+                                                    class="btn btn-red" ng-hide="!model.is_active">
+                                                <i class="fa fa-pause"></i> Disable</button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="load_model" role="tabpanel"
+                             aria-labelledby="load_model-tab">
+                            <div id="accordion" role="tablist">
+                                <div class="alert alert-success" role="alert">
+                                    <h5 class="alert-heading">Hint !</h5>
+                                    <p>You can either upload the file or perform manually copy-paste the entire text
+                                        file.
+                                        The valid content will be verified with our core internal engine.</p>
+                                </div>
+                                <div class="card mb-0">
+                                    <div class="card-header" id="headingOne" role="tab">
+                                        <h5 class="mb-0">
+                                            <a data-toggle="collapse" href="#upload" aria-expanded="true"
+                                               aria-controls="collapseOne" class="">Upload text file</a>
+                                        </h5>
+                                    </div>
+                                    <div class="collapse show" id="upload" role="tabpanel" aria-labelledby="upload"
+                                         data-parent="#accordion" style="">
+                                        <div class="card-body">
+                                            <form enctype="multipart/form-data" ng-submit="submitGuideDetailsForm()">
+                                                <div class="input-group form-group">
+                                                    <input type='file' class="form-control" name='file'
+                                                           onchange="angular.element(this).scope().uploadFile(this.files)">
+                                                    <span class="input-group-append">
+                                                </span>
+                                                </div>
+                                            <span class="help-block">Select the file and press upload button below</span><br/>
+                                            <div class="clear-fix"></div>
+                                            <button class="btn btn-sm btn-success" type="submit">
+                                                <i class="fa fa-upload"></i> Upload
+                                            </button>
+                                            <button class="btn btn-sm btn-secondary" type="submit">
+                                                <i class="fa fa-ban"></i> Reset
+                                            </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card mb-0">
+                                    <div class="card-header" id="headingTwo" role="tab">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-toggle="collapse" href="#copas"
+                                               aria-expanded="false" aria-controls="collapseTwo">Manually Copy Paste
+                                                Text</a>
+                                        </h5>
+                                    </div>
+                                    <div class="collapse" id="copas" role="tabpanel" aria-labelledby="copas"
+                                         data-parent="#accordion" style="">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label class="col-md-2 col-form-label" for="textarea-input">Plain Text
+                                                    Model</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control" id="textarea-input" ng-model="modelController.textArea"
+                                                              name="textarea-input" rows="9"
+                                                              placeholder="Copy Paste here.."></textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <button class="btn btn-sm btn-success" ng-click="modelController.saveTextModel()" type="submit">
+                                                <i class="fa fa-save"></i> Save
+                                            </button>
+                                            <button class="btn btn-sm btn-secondary" type="submit">
+                                                <i class="fa fa-ban"></i> Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

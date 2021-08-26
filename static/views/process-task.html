@@ -1,0 +1,457 @@
+<div class="animated fadeIn">
+    <div class="row" ng-hide="processTaskController.show">
+        <!--Repeat starts here-->
+        <div class="col-sm-6 col-md-4" ng-repeat="project in processTaskController.projects">
+            <div class="card" ng-if="project.is_activated">
+                <div class="card-header">
+                    <i class="fa fa-briefcase"></i>{{ project.title }}
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>{{ project.start_date | date:'dd MMMM yyyy'}} -
+                            {{ project.end_date | date:'dd MMMM yyyy'}}</strong></small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron">
+                        <p dd-text-collapse dd-text-collapse-max-length="100"
+                           dd-text-collapse-text="{{ project.description }}">
+                        </p>
+                        <p>Progress status:</p>
+                        <div class="clearfix">
+                            <div class="float-left">
+                                <strong class="ng-binding">{{ project.progress }}%</strong>
+                            </div>
+                        </div>
+                        <div >
+                            <uib-progressbar value="project.progress" ></uib-progressbar>
+                        </div>
+                        <hr class="my-4">
+                        <p class="lead">
+                            <a class="btn btn-primary" ng-click="processTaskController.startSurvey(project)" href="#"
+                               role="button" ng-if="project.model != null && project.stage == null"><i
+                                    class="fa fa-arrow-right"></i> Start
+                                Survey</a>
+                            <a class="btn btn-primary" ng-click="processTaskController.continueSurvey(project)" href="#"
+                               role="button" ng-if="project.model != null && project.stage != null"><i
+                                    class="fa fa-arrow-right"></i> Continue
+                                Survey</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--Repeat ends here-->
+        </div>
+    </div>
+    <div class="row" ng-if="processTaskController.show">
+
+        <div class="col-lg-7" ng-if="processTaskController.stage == 1" cg-busy="{promise:processTaskController.taskPromise,message:'Loading',backdrop:true,minDuration:100}">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-sticky-note"></i> Questions related to {{ processTaskController.display.variable }}
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>
+                            Stage 1 of 6
+                        </strong></small>
+                        <uib-progressbar value="processTaskController.display.progress" ></uib-progressbar>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p> What is the likelihood of the following condition?</p>
+                    <p class="jumbotron"><strong>{{ processTaskController.display.statement }}</strong></p>
+                    <p> Choose one of the conditions that you may think is the most suitable. </p>
+                    <p> Hint: <em>Please see the information panel provided.</em></p>
+                    <p ng-if="processTaskController.radioModel != null">You
+                        choose <strong>{{ processTaskController.radioModel }} ({{ processTaskController.percentage(processTaskController.radioModel) }})</strong></p>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-md-12 text-center btn-toolbar btn-group-toggle" data-toggle="buttons"
+                             style="display: block;text-align: center;">
+                            <label class="btn btn-red btn-md" ng-model="processTaskController.radioModel" ng-class="'Impossible' == processTaskController.radioModel ? 'btn-outline-red':''"
+                                   uib-btn-radio="'Impossible'">Impossible</label>
+                            <label class="btn btn-warning btn-md" ng-model="processTaskController.radioModel" ng-class="'Improbable' == processTaskController.radioModel ? 'btn-outline-warning':''"
+                                   uib-btn-radio="'Improbable'">Improbable</label>
+                            <label class="btn btn-purple btn-md" ng-model="processTaskController.radioModel" ng-class="'Uncertain' == processTaskController.radioModel ? 'btn-outline-purple':''"
+                                   uib-btn-radio="'Uncertain'">Uncertain</label>
+                            <label class="btn btn-secondary btn-md" ng-model="processTaskController.radioModel" ng-class="'Fifty-fifty' == processTaskController.radioModel ? 'btn-outline-secondary':''"
+                                   uib-btn-radio="'Fifty-fifty'">Fifty-fifty</label>
+                            <label class="btn btn-cyan btn-md" ng-model="processTaskController.radioModel" ng-class="'Expected' == processTaskController.radioModel ? 'btn-outline-cyan':''"
+                                   uib-btn-radio="'Expected'">Expected</label>
+                            <label class="btn btn-blue btn-md" ng-model="processTaskController.radioModel" ng-class="'Probable' == processTaskController.radioModel ? 'btn-outline-blue':''"
+                                   uib-btn-radio="'Probable'">Probable</label>
+                            <label class="btn btn-green btn-md" ng-model="processTaskController.radioModel" ng-class="'Certain' == processTaskController.radioModel ? 'btn-outline-green':''"
+                                   uib-btn-radio="'Certain'">Certain</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" ng-click="processTaskController.next()"> next <i
+                                class="fa fa-arrow-right"></i></button>
+                        <button class="btn btn-secondary float-none" ng-click="processTaskController.skip()"> Skip
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7" ng-if="processTaskController.stage == 2" cg-busy="{promise:processTaskController.taskPromise,message:'Loading',backdrop:true,minDuration:100}">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-sticky-note"></i> Questions related to {{ processTaskController.display.variable }}
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>
+                            Stage 2 of 6
+                        </strong></small>
+                        <uib-progressbar value="processTaskController.display.progress" ></uib-progressbar>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p> What is the likelihood of the following condition?</p>
+                    <p class="jumbotron"><strong>{{ processTaskController.display.statement }}</strong></p>
+                    <p> If we know that the following condition applies;</p>
+                    <p class="jumbotron"><strong>{{ processTaskController.display.condition }}</strong></p>
+                    <p> Choose one of the conditions that you may think is the most suitable. </p>
+                    <p ng-if="processTaskController.radioModel != null">You
+                        choose <strong>{{ processTaskController.radioModel }} ({{ processTaskController.percentage(processTaskController.radioModel) }})</strong></p>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-md-12 text-center btn-toolbar btn-group-toggle" data-toggle="buttons"
+                             style="display: block;text-align: center;">
+                            <label class="btn btn-red btn-md" ng-model="processTaskController.radioModel" ng-class="'Impossible' == processTaskController.radioModel ? 'btn-outline-red':''"
+                                   uib-btn-radio="'Impossible'">Impossible</label>
+                            <label class="btn btn-warning btn-md" ng-model="processTaskController.radioModel" ng-class="'Improbable' == processTaskController.radioModel ? 'btn-outline-warning':''"
+                                   uib-btn-radio="'Improbable'">Improbable</label>
+                            <label class="btn btn-purple btn-md" ng-model="processTaskController.radioModel" ng-class="'Uncertain' == processTaskController.radioModel ? 'btn-outline-purple':''"
+                                   uib-btn-radio="'Uncertain'">Uncertain</label>
+                            <label class="btn btn-secondary btn-md" ng-model="processTaskController.radioModel" ng-class="'Fifty-fifty' == processTaskController.radioModel ? 'btn-outline-secondary':''"
+                                   uib-btn-radio="'Fifty-fifty'">Fifty-fifty</label>
+                            <label class="btn btn-cyan btn-md" ng-model="processTaskController.radioModel" ng-class="'Expected' == processTaskController.radioModel ? 'btn-outline-cyan':''"
+                                   uib-btn-radio="'Expected'">Expected</label>
+                            <label class="btn btn-blue btn-md" ng-model="processTaskController.radioModel" ng-class="'Probable' == processTaskController.radioModel ? 'btn-outline-blue':''"
+                                   uib-btn-radio="'Probable'">Probable</label>
+                            <label class="btn btn-green btn-md" ng-model="processTaskController.radioModel" ng-class="'Certain' == processTaskController.radioModel ? 'btn-outline-green':''"
+                                   uib-btn-radio="'Certain'">Certain</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" ng-click="processTaskController.next()"> next <i
+                                class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7" ng-if="processTaskController.stage == 3" cg-busy="{promise:processTaskController.taskPromise,message:'Loading',backdrop:true,minDuration:100}">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-sticky-note"></i> Questions related to Weight
+                    of {{ processTaskController.display.variable }}
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>
+                            Stage 3 of 6
+                        </strong></small>
+                        <uib-progressbar value="processTaskController.display.progress" ></uib-progressbar>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p> How much <strong>{{ processTaskController.display.variable }}</strong> might be influenced by
+                        each one of them?</p>
+                    <div class="form-group row jumbotron" ng-repeat="parent in processTaskController.display.parents">
+                        <label class="col-md-4 col-form-label" for="opt"><strong>{{ parent.label }}</strong></label>
+                        <div class="cold-md-8">
+                            <select class="form-control form-group" id="opt" name="opt"
+                                    ng-model="processTaskController.display.objects[parent.w_id]">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            <span class="help-block">Times</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" ng-click="processTaskController.next()"> next <i
+                                class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7" ng-if="processTaskController.stage == 4" cg-busy="{promise:processTaskController.taskPromise,message:'Loading',backdrop:true,minDuration:100}">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-sticky-note"></i> Questions related to {{ processTaskController.display.variable }}
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>
+                            Stage 4 of 6
+                        </strong></small>
+                        <uib-progressbar value="processTaskController.display.progress" ></uib-progressbar>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p> If we know the condition that;</p>
+                    <p class="jumbotron"><strong>{{ processTaskController.display.statement }}.</strong></p>
+                    <p> Then, we might expect that</p>
+                    <div class="row" ng-repeat="variable in processTaskController.display.variables">
+                        <div class="col-sm-12">
+                            <span ng-if="$index != 0">and </span> <label for="opt"><strong>{{ variable.var_name }} is</strong></label>
+                            <div class="col-md-12 text-center btn-toolbar btn-group-toggle jumbotron" data-toggle="buttons"
+                             style="display: block;text-align: center;">
+                                <span ng-repeat="state in variable.states">
+                                <label class="btn btn-secondary btn-md" ng-class="state.state_id == processTaskController.radioModel[variable.var_id].state_id ? 'btn-green':''"
+                                       ng-model="processTaskController.radioModel[variable.var_id].state_id"
+                                   uib-btn-radio="{{ state.state_id }}">{{ state.state_label }}</label>
+                                    <span ng-if="$index != variable.states.length - 1">or</span>
+                                 </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" ng-click="processTaskController.next()"> next <i
+                                class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7" ng-if="processTaskController.stage == 5" cg-busy="{promise:processTaskController.taskPromise,message:'Loading',backdrop:true,minDuration:100}">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-sticky-note"></i> Questions related to {{ processTaskController.display.variable }}
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>
+                            Stage 5 of 6
+                        </strong></small>
+                        <uib-progressbar value="processTaskController.display.progress" ></uib-progressbar>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p> What is the likelihood of the following condition?</p>
+                    <p class="jumbotron"><strong>{{ processTaskController.display.statement }}</strong></p>
+                    <p> If we know that the following condition apply;</p>
+                    <span ng-repeat="condition in processTaskController.display.conditions">
+                        <p class="jumbotron"><strong>{{ condition }}</strong></p>
+                        <p ng-if="$index != processTaskController.display.conditions.length - 1">and</p>
+                    </span>
+                    <p> Choose one of the conditions that you may think is the most suitable. </p>
+                    <p ng-if="processTaskController.radioModel != null">You
+                        choose <strong>{{ processTaskController.radioModel }} ({{ processTaskController.percentage(processTaskController.radioModel) }})</strong></p>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-md-12 text-center btn-toolbar btn-group-toggle" data-toggle="buttons"
+                             style="display: block;text-align: center;">
+                            <label class="btn btn-red btn-md" ng-model="processTaskController.radioModel" ng-class="'Impossible' == processTaskController.radioModel ? 'btn-outline-red':''"
+                                   uib-btn-radio="'Impossible'">Impossible</label>
+                            <label class="btn btn-warning btn-md" ng-model="processTaskController.radioModel" ng-class="'Improbable' == processTaskController.radioModel ? 'btn-outline-warning':''"
+                                   uib-btn-radio="'Improbable'">Improbable</label>
+                            <label class="btn btn-purple btn-md" ng-model="processTaskController.radioModel" ng-class="'Uncertain' == processTaskController.radioModel ? 'btn-outline-purple':''"
+                                   uib-btn-radio="'Uncertain'">Uncertain</label>
+                            <label class="btn btn-secondary btn-md" ng-model="processTaskController.radioModel" ng-class="'Fifty-fifty' == processTaskController.radioModel ? 'btn-outline-secondary':''"
+                                   uib-btn-radio="'Fifty-fifty'">Fifty-fifty</label>
+                            <label class="btn btn-cyan btn-md" ng-model="processTaskController.radioModel" ng-class="'Expected' == processTaskController.radioModel ? 'btn-outline-cyan':''"
+                                   uib-btn-radio="'Expected'">Expected</label>
+                            <label class="btn btn-blue btn-md" ng-model="processTaskController.radioModel" ng-class="'Probable' == processTaskController.radioModel ? 'btn-outline-blue':''"
+                                   uib-btn-radio="'Probable'">Probable</label>
+                            <label class="btn btn-green btn-md" ng-model="processTaskController.radioModel" ng-class="'Certain' == processTaskController.radioModel ? 'btn-outline-green':''"
+                                   uib-btn-radio="'Certain'">Certain</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" ng-click="processTaskController.next()"> next <i
+                                class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7" ng-if="processTaskController.stage == 6" cg-busy="{promise:processTaskController.taskPromise,message:'Loading',backdrop:true,minDuration:100}">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-sticky-note"></i> Questions related to {{ processTaskController.display.variable }}
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>
+                            Stage 6 of 6
+                        </strong></small>
+                        <uib-progressbar value="processTaskController.display.progress" ></uib-progressbar>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Every variable within the network will fall into one or more categories. Which category
+                    would you apply to <strong>{{ processTaskController.display.variable }} ?</strong></p>
+                    <p> Hint: <em>You can choose more than one categories</em></p>
+
+                    <div class="row" cg-busy="{promise:processTaskController.tagPromise,message:'Loading',backdrop:true}">
+                        <div class="col-md-12 text-center btn-toolbar btn-group-toggle jumbotron" data-toggle="buttons"
+                         style="display: block;text-align: center;">
+                            <span  ng-repeat="tag in processTaskController.display.tags">
+                            <button type="button" class="btn btn-secondary btn-md" ng-click="processTaskController.pushTag(tag.id)"
+                                   ng-model="processTaskController.display.tags" ng-class="processTaskController.checkResults.indexOf(tag.id) >= 0 ? 'btn-green':''"
+                              ui-btn-checkbox>{{ tag.label }}</button>
+                             </span>
+                        </div>
+                    </div>
+                    <p>If you wish to add another category, please click <a href="javascript:;" ng-click="processTaskController.addTag()" >here</a>.</p>
+
+                </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" ng-click="processTaskController.next()"> next <i
+                                class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5" ng-hide="processTaskController.stage == 9">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-question"></i> Information
+                    <div class="card-header-actions">
+                        <small class="text-muted"><strong>
+                            Manual
+                        </strong></small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron-light">
+                        <p ng-show="processTaskController.stage == 1">There are six stages in which, you will be asked
+                            different type
+                            questions. This is <strong>Stage One</strong>,
+                            in this stage we will ask you regarding parents variables
+                            likelihood condition.
+                        </p>
+                        <p ng-show="processTaskController.stage == 2">There are six stages in which, you will be asked
+                            different type
+                            questions - this is <strong>Stage Two</strong>. In this stage, questions regarding state
+                            within a conditionally
+                            dependent variable (a variable that depends on a single parent) will be asked. Please pay
+                            attention to
+                            the applying condition.
+                        </p>
+                        <p ng-show="processTaskController.stage == 3">There are six stages in which, you will be asked
+                            different type
+                            questions - this is <strong>Stage Three</strong>. In this stage, we will ask you to
+                            determine
+                            how strong a parent variable may influence the child variable condition.
+                            <br/>
+                            For instance, suppose we have two parent variables of <em>Laptop Brand</em> and <em>Laptop
+                                Age</em>
+                            and one child variable of <em>Laptop Price</em>. What do you think more influence between
+                            the parent
+                            variables (<em>Brand &amp; Age</em>) to <em>Laptop Price</em>? In this case, one may say the
+                            <em>Brand</em>
+                            has more likely to affect a <em> Laptop Price</em> by a factor of 4x, meanwhile <em>Age</em>
+                            only affect
+                            by a factor of 3x.
+                        </p>
+                        <p ng-show="processTaskController.stage == 4">There are six stages in which, you will be asked
+                            different type
+                            questions. This is <strong>Stage four</strong>,
+                            in this stage you need to provide a compatible parental configuration (cpc) for each
+                            different
+                            pair.
+                        </p>
+                        <p ng-show="processTaskController.stage == 5">There are six stages in which, you will be asked
+                            different type
+                            questions. This is <strong>Stage five</strong>,
+                            and you need to choose a condition applied given of several conditions.
+                        </p>
+                        <p ng-show="processTaskController.stage == 4">What is <strong>CPC</strong>? <br/>
+                            For this, you need to imagine that the most "make sense" pair for each of the statement and
+                            choose
+                            based on the options provided. For instance, suppose that you found a condition of "Laptop
+                            Price is expensive",
+                            then you might be expecting that "the average salary is high" and "the profession is
+                            professional".
+                        </p>
+                        <p ng-show="processTaskController.stage == 4">When you pressed one of the buttons provided,
+                            your button's option will change the color into green. If you wish to cancel, simply press
+                            other buttons or press back.
+                        </p>
+                        <p ng-show="processTaskController.stage == 3">
+                            Using input options provided, please choose the level of influence in numbers to indicate
+                            the
+                            strength level a parent variable may affected the child variable.
+                        </p>
+                        <p ng-show="processTaskController.stage < 3 || processTaskController.stage == 5">Here are some
+                            of the information you should know, when answering the questions.<br/>
+                            For example, <em>what is the chance of finding a random</em>
+                        </p>
+
+                        <ul ng-show="processTaskController.stage < 3 || processTaskController.stage == 5">
+                            <li><em>Impossible</em> means that the condition will likely never
+                                occurred, or impossible to be happened. The value is <strong>0%</strong>.
+                            </li>
+                            <li><em>Improbable</em> means that the condition has a very small chance
+                                of happening. The value is <strong>15%</strong>.
+                            </li>
+                            <li><em>Uncertain</em> means that the condition has only slightly chance of
+                                happening. The value is <strong>25%</strong>.
+                            </li>
+                            <li><em>Fifty-fifty</em> means that the condition has equally chance of
+                                happening and not happening. The value is <strong>50%</strong>.
+                            </li>
+                            <li><em>Expected</em> means that we expect that the condition may be happened or
+                                applicable. The value is <strong>75%</strong>.
+                            </li>
+                            <li><em>Probable</em> means that this condition has high chance of happening.
+                                The value is <strong>85%</strong>.
+                            </li>
+                            <li><em>Certain</em> means that this condition will definitely happened.
+                                The value is <strong>100%</strong>.
+                            </li>
+                        </ul>
+
+                        <p ng-show="processTaskController.stage == 6">This is <strong>Stage six</strong> which
+                            is the last stage. In this stage, you need to choose one or more categories that you might
+                            think the most suitable for a given variable. You can also provide your own tag which
+                            later will be re-used again.
+                        </p>
+
+                        <p ng-show="processTaskController.stage == 6">
+                            The purpose of this process is to manually cluster every variables into appropriate
+                            nature. If you wish to add another category, please click the link
+                            <a href="javascript:;" ng-click="processTaskController.addTag()" >here</a>. The new category
+                            will be used for the remaining iteration.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5" ng-if="processTaskController.stage == 9">
+            <div class="card">
+                <div class="card-header">
+                    Information
+                </div>
+                <div class="card-body">
+                    <div class="jumbotron-light">
+                        <p>All questions have been successfully answered. <br>
+                            Thank you for your participation in this research. </p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" ng-click="processTaskController.back()"> Finish <i
+                                class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

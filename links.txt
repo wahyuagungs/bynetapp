@@ -1,0 +1,37 @@
+AngularJS and D3: A Quick Example
+https://medium.com/@haroldcampbell/integrating-angularjs-with-d3-a-quick-example-d5751f2bf703
+https://github.com/haroldcampbell/d3_angular_example_1
+
+
+angular + flask
+https://stackoverflow.com/questions/18872240/how-to-develop-a-web-app-with-angularjs-at-client-side-and-flask-at-backend
+https://stackoverflow.com/questions/30362950/is-it-possible-to-use-angular-with-the-jinja2-template-engine
+https://stackoverflow.com/questions/11522151/typical-angularjs-workflow-and-project-structure-with-python-flask
+
+github angular flask
+https://github.com/shea256/angular-flask/blob/master/angular_flask/templates/index.html
+
+flask by example
+https://realpython.com/flask-by-example-integrating-flask-and-angularjs/
+
+http://www.blog.pythonlibrary.org/2010/09/10/sqlalchemy-connecting-to-pre-existing-databases/
+https://www.tutorialspoint.com/flask/flask_sqlite.htm
+https://pythonspot.com/login-authentication-with-flask/
+http://flask.pocoo.org/extensions/
+
+<ul>
+                            <li>In phase one,
+                            </li>
+                            <li>In phase two, we will ask you regarding
+                                a condition in which a parent may affect
+                                the likelihood of its condition
+                            </li>
+                            <li>In phase three, we will ask you two things;
+                                the weights of each parent and their compatible
+                                states.
+                            </li>
+                            <li>
+                                The number of questions in this survey, depends
+                                on the number of nodes, and each state.
+                            </li>
+                        </ul>
